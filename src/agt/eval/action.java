@@ -16,13 +16,10 @@ public class action extends DefaultInternalAction {
 
     @Override
     public Object execute(TransitionSystem ts, Unifier un, Term[] args) throws Exception {
-        // execute the internal action
-//        ts.getAg().getLogger().info("executing internal action 'eval.action'");
 
     	//as duas linhas abaixos operam com regex para extrair o tipo do agente pela asl do Jason
     	String[] agentTypePath = ts.getAg().toString().split(".*/");
     	String[] agentType = agentTypePath[1].split("\\.");
-//        System.out.println(">>>" + agentType[0]);
     	
     	try {
     		System.out.println("Acao interna recebeu " + args[0]);

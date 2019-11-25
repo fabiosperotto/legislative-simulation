@@ -21,20 +21,16 @@ public class Legislacao extends Artifact {
 
 	@OPERATION
 	void checkAction(String action) {
-		//System.out.println("acao = "+action);
-		
-//		System.out.println(">>> "+getCurrentOpAgentId().getAgentName());
 		
 		OntologyConfigurator ontology = new OntologyConfigurator();
 		ontology.setOrigin(OntologyConfigurator.SERVER);
 		
 		QueryProcess middleware = new QueryProcess(ontology);
 		
-		
 		List<Law> laws =  middleware.searchAction(action, getCurrentOpAgentId().getAgentName());
 		
 		if(!laws.isEmpty()) {
-//			signal("violacao");
+
 			for(int i = 0; i < laws.size(); i++) {
 				System.out.println("Lei encontrada -> " + laws.get(i).getIndividual());
 				List<Norm> norms = laws.get(i).getNorms();
