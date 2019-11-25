@@ -13,7 +13,7 @@ Projeto de testes e aprendizado com simulações sociais avaliando ações dos a
 - Para incluir a biblioteca agentdevlaw.jar (ou outras), insira a mesma em /lib. Depois clique com o botão direito na biblioteca e selecione a opção Build Path > Add Build Path, a mesma será referenciada em Referenced Libraries tornando-se funcional na aplicação (Jason ou Cartago). Para remover a biblioteca de Referenced Libraries, clique com o botão direito na mesma referenciada e siga nas opções Build Path > Remove from Build Path.
 
 ### Javadoc
-A documentação da biblioteca encontra-se em /doc, inclua o arquivo .zip clicando com botão direito na biblioteca em Referecned libraries > Properties > Javadoc Location > Javadoc archive.
+A documentação da biblioteca encontra-se em /doc, inclua o arquivo .zip clicando com botão direito na biblioteca em Referenced libraries > Properties > Javadoc Location > Javadoc archive.
 
 ### Integração da biblioteca
 Após inserir no build path, e independente da utilização com artefatos Cartago ou ação interna Jason, poderá ser utilizado como:
