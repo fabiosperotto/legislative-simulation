@@ -15,8 +15,8 @@
 mas simulalei {
 
     agent fisherman
-    agent governo
-    agent sistema
+    agent government
+    agent system
     
     asl-path: src/agt
               src/agt/inc

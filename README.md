@@ -1,6 +1,6 @@
 ## Legislative simulation
 
-Projeto de testes e aprendizado com simulações sociais avaliando ações dos agentes através de consultas sobre leis em ontologias (em breve será repassado middleware em outro repositório). Utiliza como plataforma o ambiente [JaCaMo](http://jacamo.sourceforge.net).
+Projeto de testes e aprendizado com simulações sociais avaliando ações dos agentes através de consultas sobre leis em ontologias. Utiliza o middleware [AgentDevLaw](https://github.com/fabiosperotto/agentdevlaw) em seu último release. Usa como plataforma o ambiente [JaCaMo](http://jacamo.sourceforge.net).
 
 
 ### Informação
@@ -15,7 +15,9 @@ Projeto de testes e aprendizado com simulações sociais avaliando ações dos a
 ### Javadoc
 A documentação da biblioteca encontra-se em /doc, inclua o arquivo .zip clicando com botão direito na biblioteca em Referenced libraries > Properties > Javadoc Location > Javadoc archive.
 
-### Integração da biblioteca
+
+### Configurações
+Inserir agentdevlaw.jar no build path da aplicação (uma cópia deste encontra-se no diretório /lib/agentdevlaw.jar). Na IDE Eclipse: botaõ direito na biblioteca > Build Path > Add to Build Path.
 Após inserir no build path, e independente da utilização com artefatos Cartago ou ação interna Jason, poderá ser utilizado como:
 ```java
 OntologyConfigurator ontology = new OntologyConfigurator(); //classe de configuracao para com a ontologia

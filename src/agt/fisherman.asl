@@ -5,20 +5,16 @@
 /* Initial goals */
 
 !start.
-
-
 /* Plans */
-
-
-	
 +!start : true <- 
-	.print("Pescador online");
-	//abaixo segue forma de utilizar internal action para 
-	//o agente se comunicar diretamente com a ontologia
-	eval.action("fish", A);
-	+devendoEstado(A).
+	.print("Amateur fisherman online").
+	//above is another option with
+	//internal action agent to communicate
+	//with legal ontology
+	//eval.action("fish", A);
+	//+stateSanction(A).
 	
-+legislacao: true <-
++legislation: true <-
 	checkAction("fish").
 //	.my_name(N);
 //	.print("meu nome é ",N).
