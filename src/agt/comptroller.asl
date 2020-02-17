@@ -1,5 +1,5 @@
 // Agent comptroller in project simulalei
-//This is a relator or comptroller of a committee about a specific legislations studies in chamber of deputies
+//This is a relator or comptroller of a committee about a specific legislations studies from chamber of deputies
 
 /* Initial beliefs and rules */
 
@@ -10,17 +10,18 @@
 /* Plans */
 
 +!start : true <- 
+	//the law model used in this example is extracted from law 9605, article 41: http://www.planalto.gov.br/ccivil_03/leis/l9605.htm
 	.print("Researching about law proposal: 'Cause a fire in the woods or forest'");
 	chamber.research("Cause a fire in the woods or forest", "allRoles", P);
-	!send_proposal(P, "Cause a fire in the woods or forest", "Confinement>min_jail=2;max_jail=4@PayAFine>pay-a-fine=500").
+	!send_proposal(P, "Cause a fire in the woods or forest", "paragraph-u", "Confinement>detention-2_4@PayAFine>pay-a-fine-500", "allRoles").
 	
 	
-+!send_proposal(P, D, S) : P = "no" <-
++!send_proposal(P, D, Par, S, R) : P = "no" <-
 		.print("Proposal that does not exist in current legislation: ", D);
-		.send(committee_chairman, tell, proposal(D, S)).
+		.send(committee_chairman, tell, proposal(D, Par, S, R)).
 
 
-+!send_proposal(P, D) : P \== "no" <-
++!send_proposal(P, D, Par, S, R) : P \== "no" <-
 		.print("Proposal '",D,"' exist in current legislation").		
 
 { include("$jacamoJar/templates/common-cartago.asl") }

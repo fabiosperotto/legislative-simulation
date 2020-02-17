@@ -14,27 +14,30 @@
 	focus(VoteBoard).
 
 
-+proposal_approved(D, S) : true <-
++proposal_approved(D, Par, S, R) : true <-
 	.print("I received a new law proposal: ", D, " let's vote!");
-	!voting_law(D, S).
+	!voting_law(D, Par, S, R).
 	
-+!voting_law(D, S): true <-
-	.broadcast(tell, vote_proposal(D, S)).
++!voting_law(D, Par, S, R): true <-
+	.broadcast(tell, vote_proposal(D, Par, S, R)). //this will start the election
 	
 
-+polling(D, S, V)[source(A)] : true <- 
-	board(V, A, D, S)[artifact_name("voteBoard")].
++polling(D, Par, S, R, V)[source(A)] : true <- 
+	board(V, A, D, Par, S, R)[artifact_name("voteBoard")]. //here the votes are computed
 	
 	
-+vote_ended(D, S) : law_approved(X) & X = "yes" <-
++vote_ended(D, Par, S, R) : law_approved(X) & X = "yes" <-
 	.print("All voted, law is approved!");
 	.send(committee_chairman, tell, law_approved(D,"yes"));
-	.send(senator_president, tell, law_approved_chamber(D, S)).
+	.send(senator_president, tell, law_approved_chamber(D, Par, S, R)).
 	
 	
-+vote_ended(D, S) : law_approved(X) & X \== "yes" <-
++vote_ended(D, Par, S, R) : law_approved(X) & X \== "yes" <-
 	.print("All voted, law is not approved");
 	.send(committee_chairman, tell, law_approved(D,"no")).
+	
++law_published(N, D, Par, S, R) : true <-
+	.print("I received the law", N, ". Thank you Mr./Mrs. President").
 
 { include("$jacamoJar/templates/common-cartago.asl") }
 { include("$jacamoJar/templates/common-moise.asl") }

@@ -8,9 +8,9 @@
 
 /* Plans */
 
-+proposal(D, S) : true <-
++proposal(D, Par, S, R) : true <-
 	.print("An proposal is ready");
-	.send(deputies_president, tell, proposal_approved(D, S)).
+	.send(deputies_president, tell, proposal_approved(D, Par, S, R)).
 
 { include("$jacamoJar/templates/common-cartago.asl") }
 { include("$jacamoJar/templates/common-moise.asl") }

@@ -4,12 +4,26 @@
 
 /* Initial goals */
 
+!start.
 
 /* Plans */
 
-+law_approved_senate(D, S) : true <- 
-	.print("My attention is needed, a law was approved on senate").
++!start : true <-
+	makeArtifact("publication", "congress.Publication", [], PublicationID);
+	lookupArtifact("publication", Publication);
+	focus(Publication).
 
++law_approved_senate(D, Par, S, R) : true <- 
+	.print("My attention is needed, a law was approved on senate");
+	newLaw(D, Par, S, R)[artifact_name("publication")]. //here the agent will create the law in ontology through middleware
+
++law_published(N, D, Par, S, R) : true <-
+	.print("I approve and sign this new law");
+	.broadcast(tell, law_published(N, D, Par, S, R)).
+	
++law_publishing_error(N, D, Par, S, R) : true <-
+	.print("Something is wrong with this law '",D,"' and I cannot approve").
+	
 { include("$jacamoJar/templates/common-cartago.asl") }
 { include("$jacamoJar/templates/common-moise.asl") }
 

@@ -9,7 +9,7 @@ import cartago.*;
 
 public class VoteBoard extends Artifact {
 	
-	List votes = new ArrayList();
+	List votes = new ArrayList(); //just to record the votes and the name of the agent that voted, this is nominal vote
 	int votesInFavor;
 	int votesAgainst;
 	
@@ -22,10 +22,13 @@ public class VoteBoard extends Artifact {
 	}
 
 	@OPERATION
-	void board(Double vote, String politician, String lawDescription, String sanctionList) {
+	void board(Double vote, String politician, String lawDescription, String paragraph, String sanctionList, String role) {
 
-		int voteProcessed = (int) Math.round(vote);
+		//the votes are double variable between 0 and 1, the round function works to round the vote to
+		//zero or one (vote no and vote yes respectively)
+		int voteProcessed = (int) Math.round(vote); 
 		boolean infavor = false;
+		
 		if(voteProcessed == 1) {
 			infavor = true;
 			this.votesInFavor++;
@@ -41,13 +44,14 @@ public class VoteBoard extends Artifact {
 		Vote voteCell = new Vote(politician, infavor);
 		this.votes.add(voteCell);
 		
+		//when the voters' count is equal to zero, all votes were collected
 		ObsProperty prop = getObsProperty("voters");
 	    prop.updateValue(prop.intValue()-1);
-	    if(prop.intValue() == 0) this.voteResults(lawDescription, sanctionList);
+	    if(prop.intValue() == 0) this.voteResults(lawDescription, paragraph, sanctionList, role);
 		
 	}
 	
-	void voteResults(String lawDescription, String sanctionList) {
+	void voteResults(String lawDescription, String paragraph, String sanctionList, String role) {
 		
 		System.out.println("Votes in favor = "+this.votesInFavor);
 		System.out.println("Votes against = "+this.votesAgainst);
@@ -55,7 +59,7 @@ public class VoteBoard extends Artifact {
 			ObsProperty prop = getObsProperty("law_approved");
 			prop.updateValue("yes");
 		}
-		signal("vote_ended", lawDescription, sanctionList);
+		signal("vote_ended", lawDescription, paragraph, sanctionList, role);
 	}
 }
 

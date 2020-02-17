@@ -17,7 +17,7 @@ mas simulalei {
     agent fisherman
     agent government
     agent system
-//	the following agents activate the election simulation of new laws
+//	the following agents activate the election simulation of new laws (congress simulation)
 //	agent relator : comptroller.asl
 //	agent committee_chairman : chairman.asl
 //	agent deputies_president : chamber_president.asl

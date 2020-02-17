@@ -20,7 +20,7 @@ public class research extends DefaultInternalAction {
         ts.getAg().getLogger().info("executing internal action 'chamber.research'");
         
         try {
-    		System.out.println("Verifying law proposal " + args[0]);
+    		System.out.println("Middleware -> verifying law proposal: " + args[0]);
         	
         	StringTerm description = (StringTerm)args[0];
         	StringTerm role = (StringTerm)args[1];
@@ -40,17 +40,15 @@ public class research extends DefaultInternalAction {
     				
     			}
     			
-//    			return un.unifies(positive, args[2]);
-    			
     		}
         	
         	return un.unifies(result, args[2]);
  
         	
     	}catch (ArrayIndexOutOfBoundsException e) {
-			throw new JasonException("A acao interna 'action' não recebeu 2 parametros obrigatório");
+			throw new JasonException("The internal action 'action' need 2 parameters");
 		}catch (Exception e) {
-			throw new JasonException("Algum erro na execucao de internal action 'action'");
+			throw new JasonException("Something is wrong with the internal action 'action'");
 		}
     }
 }
