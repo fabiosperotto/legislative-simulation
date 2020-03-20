@@ -67,7 +67,7 @@ Here the Relator agent finds legislation that exactly match with the proposal an
 
 ![alt text](./screenshots/jacamo-simulation-debug-senate-president.png "Debug window of senate president")
 
-This is the debug window of the president of the senate when the simulation is finished. His belief describes that all senators votes and the approved law proposal. The belief 'law_published' is sent from the republic president and informs that law was published with a specific number (8746 in this example).
+This is the debug window of the president of the senate when the simulation is finished. His belief describes that all senators votes and the approved law proposal. The belief 'law_published' is sent from the republic president and informs that law was published with a specific number (9774 in this example).
 
 ![alt text](./screenshots/jacamo-simulation-debug-relator.png "Debug window of commite chairman agent")
 
