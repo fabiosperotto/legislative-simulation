@@ -30,23 +30,38 @@ public class research extends DefaultInternalAction {
     		QueryProcess middleware = new QueryProcess(ontology);
     		List<Law> laws =  middleware.searchAction(description.getString(), role.getString());
     		
-    		StringTerm result =  new StringTermImpl("no");
+    		StringTerm lawFind = new StringTermImpl("no");
+    		StringTerm lawDescription = new StringTermImpl("");
+    		StringTerm lawNorm = new StringTermImpl("");
+    		StringTerm lawConsequences = new StringTermImpl("");
     		
     		if(!laws.isEmpty()) {
-    			StringTerm positive = null;
+    			
     			for(int i = 0; i < laws.size(); i++) {
     				System.out.println("Legislation found: "+laws.get(i).getIndividual());
-    				result =  new StringTermImpl(laws.get(i).getIndividual());
+    				lawFind =  new StringTermImpl(laws.get(i).getIndividual());
+    				lawDescription = new StringTermImpl(laws.get(i).getDescription());
     				
+    				String consequences = "";
+    				for(int j = 0; j < laws.get(i).getNorms().size(); j++) {
+    					lawNorm = new StringTermImpl(laws.get(i).getNorms().get(j).getIndividual());
+    					consequences += laws.get(i).getNorms().get(j).getConsequenceType() + ">"; 
+    					consequences += laws.get(i).getNorms().get(j).getConsequence();
+    					if(j+1 < laws.get(i).getNorms().size()) consequences += "@";
+    				}
+    				lawConsequences = new StringTermImpl(consequences);
+    				
+    				un.unifies(lawDescription, args[3]);
+    				un.unifies(lawNorm, args[4]);
+    				un.unifies(lawConsequences, args[5]);
     			}
     			
     		}
         	
-        	return un.unifies(result, args[2]);
- 
+        	return un.unifies(lawFind, args[2]); //I dont know why 'return un' is not enough to unify to jason
         	
     	}catch (ArrayIndexOutOfBoundsException e) {
-			throw new JasonException("The internal action 'action' need 2 parameters");
+			throw new JasonException("The internal action 'research' need 5 parameters");
 		}catch (Exception e) {
 			throw new JasonException("Something is wrong with the internal action 'action'");
 		}
