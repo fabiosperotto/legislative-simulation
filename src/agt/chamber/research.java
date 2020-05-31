@@ -24,16 +24,20 @@ public class research extends DefaultInternalAction {
         	
         	StringTerm description = (StringTerm)args[0];
         	StringTerm role = (StringTerm)args[1];
+        	StringTerm action = (StringTerm)args[2];
+        	StringTerm sanctionsList = (StringTerm)args[3];
         	
         	OntologyConfigurator ontology = new OntologyConfigurator();
     		ontology.setOrigin(OntologyConfigurator.MODEL);
     		QueryProcess middleware = new QueryProcess(ontology);
-    		List<Law> laws =  middleware.searchAction(description.getString(), role.getString());
+    		List<Law> laws =  middleware.searchAction(action.getString(), role.getString());
     		
     		StringTerm lawFind = new StringTermImpl("no");
     		StringTerm lawDescription = new StringTermImpl("");
     		StringTerm lawNorm = new StringTermImpl("");
     		StringTerm lawConsequences = new StringTermImpl("");
+    		
+    		
     		
     		if(!laws.isEmpty()) {
     			
@@ -51,17 +55,29 @@ public class research extends DefaultInternalAction {
     				}
     				lawConsequences = new StringTermImpl(consequences);
     				
-    				un.unifies(lawDescription, args[3]);
-    				un.unifies(lawNorm, args[4]);
-    				un.unifies(lawConsequences, args[5]);
+    				un.unifies(lawDescription, args[5]);
+    				un.unifies(lawNorm, args[6]);
+    				un.unifies(lawConsequences, args[7]);
+    				un.unifies(action, args[8]);
+    				un.unifies(role, args[9]);
     			}
     			
     		}
+    		
+    		if(laws.isEmpty()) {
+    			un.unifies(description, args[5]);
+    			un.unifies(lawNorm, args[6]);
+    			un.unifies(sanctionsList, args[7]);
+    			un.unifies(action, args[8]);
+    			un.unifies(role, args[9]);
+    		}
+    		
+    		
         	
-        	return un.unifies(lawFind, args[2]); //I dont know why 'return un' is not enough to unify to jason
+        	return un.unifies(lawFind, args[4]); //I dont know why 'return un' is not enough to unify to jason
         	
     	}catch (ArrayIndexOutOfBoundsException e) {
-			throw new JasonException("The internal action 'research' need 5 parameters");
+			throw new JasonException("The internal action 'research' need 6 parameters");
 		}catch (Exception e) {
 			throw new JasonException("Something is wrong with the internal action 'action'");
 		}

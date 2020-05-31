@@ -27,11 +27,11 @@ mas simulalei {
 //	agent deputy4 : congressman.asl
 //	agent deputy5 : congressman.asl
 //	agent senator_president : senate_president.asl
-//	agent sentator1 : senator.asl
-//	agent sentator2 : senator.asl
-//	agent sentator3 : senator.asl
-//	agent sentator4 : senator.asl
-//	agent sentator5 : senator.asl
+//	agent senator1 : senator.asl
+//	agent senator2 : senator.asl
+//	agent senator3 : senator.asl
+//	agent senator4 : senator.asl
+//	agent senator5 : senator.asl
 //	agent president : republic_president.asl
     
     asl-path: src/agt

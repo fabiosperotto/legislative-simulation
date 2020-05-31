@@ -7,9 +7,9 @@
 
 /* Plans */
 
-+vote_proposal_in_senate(D, Par, S, R)[source(A)]: true <-
++vote_proposal_in_senate(D, Par, S, A, R)[source(O)]: true <-
 	.term2string(N, math.random * 1 + 0);
-	.send(A, tell, polling_senate(D, Par, S, R, N)).
+	.send(O, tell, polling_senate(D, Par, S, A, R, N)).
 
 { include("$jacamoJar/templates/common-cartago.asl") }
 { include("$jacamoJar/templates/common-moise.asl") }

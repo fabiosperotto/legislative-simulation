@@ -27,7 +27,7 @@ public class Legislation extends Artifact {
 		QueryProcess middleware = new QueryProcess(ontology);
 		
 		List<Law> laws =  middleware.searchAction(action, getCurrentOpAgentId().getAgentName());
-		
+		System.out.println(action + " - " + getCurrentOpAgentId().getAgentName());
 		if(!laws.isEmpty()) {
 
 			for(int i = 0; i < laws.size(); i++) {

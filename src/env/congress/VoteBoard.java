@@ -22,7 +22,7 @@ public class VoteBoard extends Artifact {
 	}
 
 	@OPERATION
-	void board(Double vote, String politician, String lawDescription, String paragraph, String sanctionList, String role) {
+	void board(Double vote, String politician, String lawDescription, String paragraph, String sanctionList, String action, String role) {
 
 		//the votes are double variable between 0 and 1, the round function works to round the vote to
 		//zero or one (vote no and vote yes respectively)
@@ -47,11 +47,11 @@ public class VoteBoard extends Artifact {
 		//when the voters' count is equal to zero, all votes were collected
 		ObsProperty prop = getObsProperty("voters");
 	    prop.updateValue(prop.intValue()-1);
-	    if(prop.intValue() == 0) this.voteResults(lawDescription, paragraph, sanctionList, role);
+	    if(prop.intValue() == 0) this.voteResults(lawDescription, paragraph, sanctionList, action, role);
 		
 	}
 	
-	void voteResults(String lawDescription, String paragraph, String sanctionList, String role) {
+	void voteResults(String lawDescription, String paragraph, String sanctionList, String action, String role) {
 		
 		System.out.println("Votes in favor = "+this.votesInFavor);
 		System.out.println("Votes against = "+this.votesAgainst);
@@ -59,7 +59,7 @@ public class VoteBoard extends Artifact {
 			ObsProperty prop = getObsProperty("law_approved");
 			prop.updateValue("yes");
 		}
-		signal("vote_ended", lawDescription, paragraph, sanctionList, role);
+		signal("vote_ended", lawDescription, paragraph, sanctionList, action, role);
 	}
 }
 

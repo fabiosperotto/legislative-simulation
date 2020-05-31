@@ -15,6 +15,7 @@ public class NormProcess {
 	public NormProcess(String norms, String p, int n, String r) {
 		this.normsList = norms;
 		this.paragraph = p;
+		if(this.paragraph == "") this.paragraph = "article1";
 		this.lawNumber = n;
 		this.role = r;
 	}
@@ -62,7 +63,7 @@ public class NormProcess {
 		String[] breakNorms = this.normsList.split("@", -1);
 		for(String breaked : breakNorms) {
 
-			String[] normTypeList = breaked.split(">", 2);	
+			String[] normTypeList = breaked.split(">", 2);
 			Norm newNorm = new Norm(this.lawNumber+"-_"+this.paragraph, normTypeList[1], normTypeList[0]);
 			newNorm.setRole(this.role); //optional, if empty allRoles is the default
 			norms.add(newNorm);

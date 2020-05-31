@@ -21,7 +21,7 @@ public class Publication extends Artifact {
 	}
 
 	@OPERATION
-	void newLaw(String description, String paragraph, String sanctions, String role) {
+	void newLaw(String description, String paragraph, String sanctions, String action, String role) {
 
 		System.out.println("Processing a new law to the middleware");
 		Random r = new Random();
@@ -31,11 +31,15 @@ public class Publication extends Artifact {
 		//the logic above provide the current datetime to the law initial date		
 		Calendar calendar = Calendar.getInstance();
 		newLaw.setStartDate(OntologyDate.createDateFormat(calendar.get(Calendar.YEAR), 
-				calendar.get(Calendar.MONTH), 
+				calendar.get(Calendar.MONTH)+1, 
 				calendar.get(Calendar.DAY_OF_MONTH), 
 				calendar.get(Calendar.HOUR), 
 				calendar.get(Calendar.MINUTE), 
 				calendar.get(Calendar.SECOND)));
+		
+		List<String> actions = new ArrayList<String>();
+		actions.add(action);
+		newLaw.setActions(actions);
 		
 		NormProcess normProcessor = new NormProcess(sanctions, paragraph, lawNumber, role);
 		List<Norm> norms = new ArrayList<Norm>();
@@ -48,9 +52,9 @@ public class Publication extends Artifact {
 
 		if(middleware.insertNewLaw(newLaw)) {
 			System.out.println("A new law was published in legal ontology");
-			signal("law_published", lawNumber, description, paragraph, sanctions, role);
+			signal("law_published", lawNumber, description, paragraph, sanctions, action,  role);
 		}else {
-			signal("law_publishing_error", lawNumber, description, paragraph, sanctions, role);
+			signal("law_publishing_error", lawNumber, description, paragraph, sanctions, action, role);
 		}
 	}
 }

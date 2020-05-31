@@ -7,10 +7,10 @@
 
 /* Plans */
 
-+vote_proposal(D, Par, S, R)[source(A)]: true <-
++vote_proposal(D, Par, S, A, R)[source(O)]: true <-
 	.term2string(N, math.random * 1 + 0);
 //	.print("I vote ", N);
-	.send(A, tell, polling(D, Par, S, R, N)).
+	.send(O, tell, polling(D, Par, S, A, R, N)).
 	
 
 { include("$jacamoJar/templates/common-cartago.asl") }
